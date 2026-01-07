@@ -764,7 +764,7 @@
                 ],
                 "total_dependencies": 1
               },
-              "module": "lfx.components.input_output.text.TextInputComponent"
+              "module": "custom_components.text_input"
             },
             "output_types": [],
             "outputs": [

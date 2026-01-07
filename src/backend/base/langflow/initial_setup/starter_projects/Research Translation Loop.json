@@ -1470,7 +1470,7 @@
                 ],
                 "total_dependencies": 1
               },
-              "module": "lfx.components.flow_controls.loop.LoopComponent"
+              "module": "custom_components.loop"
             },
             "minimized": false,
             "output_types": [],
