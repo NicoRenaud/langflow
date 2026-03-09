@@ -122,6 +122,7 @@ export const nodeColors: { [char: string]: string } = {
   unknown: "#9CA3AF",
   Document: "#65a30d",
   Data: "#dc2626",
+  MolecularStructure: "#3d22c5ff",
   Message: "#4f46e5",
   number: "#7E22CF",
   Prompt: "#7c3aed",
@@ -214,8 +215,7 @@ export const SIDEBAR_CATEGORIES = [
   { display_name: "AI Analysis", name: "ai_inference", icon: "BrainCircuit" },
   { display_name: "AI Training", name: "ai_training", icon: "BrainCog" },
   { display_name: "AI Quality", name: "ai_quality", icon: "ChartScatter" },
-  { display_name: "Logic", name: "logic", icon: "ArrowRightLeft" },
-  { display_name: "Processing", name: "data_processing", icon: "ListFilter" },
+  { display_name: "AI Generation", name: "ai_generation", icon: "Sparkles" },
   {
     display_name: "Molecular Dynamics",
     name: "molecular_dynamics",
@@ -224,6 +224,9 @@ export const SIDEBAR_CATEGORIES = [
   { display_name: "Fluid Dynamics", name: "fluid_dynamics", icon: "Waves" },
 
   { display_name: "Saved", name: "saved_components", icon: "GradientSave" },
+
+  { display_name: "Logic", name: "logic", icon: "ArrowRightLeft" },
+  { display_name: "Processing", name: "data_processing", icon: "ListFilter" },
 
   // { display_name: "Prototypes", name: "prototypes", icon: "FlaskConical" },
   // { display_name: "Tools", name: "tools", icon: "Hammer" },

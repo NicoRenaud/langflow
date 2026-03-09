@@ -237,6 +237,7 @@ class LCModelComponent(Component):
             messages.insert(0, SystemMessage(content=system_message))
         inputs: list | dict = messages or {}
         lf_message = None
+
         try:
             # TODO: Depreciated Feature to be removed in upcoming release
             if hasattr(self, "output_parser") and self.output_parser is not None:
@@ -249,11 +250,13 @@ class LCModelComponent(Component):
                     "callbacks": self.get_langchain_callbacks(),
                 }
             )
+
             if stream:
                 lf_message, result = await self._handle_stream(runnable, inputs)
             else:
                 message = await runnable.ainvoke(inputs)
                 result = message.content if hasattr(message, "content") else message
+
             if isinstance(message, AIMessage):
                 status_message = self.build_status_message(message)
                 self.status = status_message

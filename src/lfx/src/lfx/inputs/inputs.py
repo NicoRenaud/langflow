@@ -112,6 +112,16 @@ class DataInput(HandleInput, InputTraceMixin, ListableInputMixin, ToolModeMixin)
     input_types: list[str] = ["Data"]
 
 
+class MolecularStructureInput(HandleInput, InputTraceMixin, ListableInputMixin, ToolModeMixin):
+    """Represents an Input that has a Handle that receives a MolecularStructure object.
+
+    Attributes:
+        input_types (list[str]): A list of input types supported by this data input.
+    """
+
+    input_types: list[str] = ["Data"]
+
+
 class DataFrameInput(HandleInput, InputTraceMixin, ListableInputMixin, ToolModeMixin):
     input_types: list[str] = ["DataFrame"]
 
