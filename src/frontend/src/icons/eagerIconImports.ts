@@ -99,6 +99,7 @@ import { SlackIcon } from "@/icons/Slack";
 import { SpiderIcon } from "@/icons/Spider";
 import { Streamlit } from "@/icons/Streamlit";
 import { SupabaseIcon } from "@/icons/supabase";
+import { SURFIcon } from "@/icons/SURF";
 import { TavilyIcon } from "@/icons/Tavily";
 import { TwelveLabsIcon } from "@/icons/TwelveLabs";
 import { ThumbDownIconCustom, ThumbUpIconCustom } from "@/icons/thumbs";
@@ -219,6 +220,7 @@ export const eagerIconsMapping = {
   Spider: SpiderIcon,
   Streamlit: Streamlit,
   Supabase: SupabaseIcon,
+  SURF: SURFIcon,
   Tavily: TavilyIcon,
   ThumbDownCustom: ThumbDownIconCustom,
   ThumbUpCustom: ThumbUpIconCustom,

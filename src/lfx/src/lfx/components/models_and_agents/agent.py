@@ -43,6 +43,7 @@ class AgentComponent(ToolCallingAgentComponent):
     icon = "bot"
     beta = False
     name = "Agent"
+    priority = 0  # Set priority to 0 to make it appear first in the Models & Agents category
 
     memory_inputs = [set_advanced_true(component_input) for component_input in MemoryComponent().inputs]
 

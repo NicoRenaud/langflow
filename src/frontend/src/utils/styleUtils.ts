@@ -211,11 +211,13 @@ export const FILE_ICONS = {
 export const SIDEBAR_CATEGORIES = [
   { display_name: "Read Data", name: "load_data", icon: "Database" },
   { display_name: "Write Data", name: "write_data", icon: "Database" },
+  { display_name: "Models & Agents", name: "models_and_agents", icon: "Bot" },
   { display_name: "Compute Platform", name: "compute_service", icon: "CPU" },
-  { display_name: "AI Analysis", name: "ai_inference", icon: "BrainCircuit" },
-  { display_name: "AI Training", name: "ai_training", icon: "BrainCog" },
-  { display_name: "AI Quality", name: "ai_quality", icon: "ChartScatter" },
-  { display_name: "AI Generation", name: "ai_generation", icon: "Sparkles" },
+  // { display_name: "AI Analysis", name: "ai_inference", icon: "BrainCircuit" },
+  // { display_name: "AI Training", name: "ai_training", icon: "BrainCog" },
+  // { display_name: "AI Quality", name: "ai_quality", icon: "ChartScatter" },
+  // { display_name: "AI Generation", name: "ai_generation", icon: "Sparkles" },
+  { display_name: "HPC Workload", name: "generic_jobs", icon: "Cpu" },
   {
     display_name: "Molecular Dynamics",
     name: "molecular_dynamics",
@@ -256,7 +258,6 @@ export const SIDEBAR_BUNDLES = [
   },
   { display_name: "Input & Output", name: "input_output", icon: "Cable" },
   { display_name: "Data Sources", name: "data_source", icon: "Database" },
-  { display_name: "Models & Agents", name: "models_and_agents", icon: "Bot" },
   { display_name: "Utilities", name: "utilities", icon: "Wand2" },
   {
     display_name: ENABLE_KNOWLEDGE_BASES ? "Files & Knowledge" : "Files",

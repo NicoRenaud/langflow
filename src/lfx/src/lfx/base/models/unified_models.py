@@ -15,6 +15,7 @@ from lfx.base.models.google_generative_ai_constants import (
 )
 from lfx.base.models.ollama_constants import OLLAMA_EMBEDDING_MODELS_DETAILED, OLLAMA_MODELS_DETAILED
 from lfx.base.models.openai_constants import OPENAI_EMBEDDING_MODELS_DETAILED, OPENAI_MODELS_DETAILED
+from lfx.base.models.surf_aihub_constants import DEFAULT_SURF_API_URL, SURF_MODELS_DETAILED
 from lfx.base.models.watsonx_constants import WATSONX_MODELS_DETAILED
 from lfx.log.logger import logger
 from lfx.services.deps import get_variable_service, session_scope
@@ -79,6 +80,10 @@ def get_model_provider_metadata():
             "icon": "WatsonxAI",
             "variable_name": "WATSONX_APIKEY",
         },
+        "SURF AI Hub": {
+            "icon": "SURF",
+            "variable_name": "SURF_API_KEY",
+        },
     }
 
 
@@ -95,6 +100,7 @@ def get_models_detailed():
         OLLAMA_MODELS_DETAILED,
         OLLAMA_EMBEDDING_MODELS_DETAILED,
         WATSONX_MODELS_DETAILED,
+        SURF_MODELS_DETAILED,
     ]
 
 
@@ -246,6 +252,7 @@ def get_api_key_for_provider(user_id: UUID | str | None, provider: str, api_key:
         "Anthropic": "ANTHROPIC_API_KEY",
         "Google Generative AI": "GOOGLE_API_KEY",
         "IBM WatsonX": "WATSONX_APIKEY",
+        "SURF AI Hub": "SURF_API_KEY",
     }
 
     variable_name = provider_variable_map.get(provider)
@@ -285,6 +292,7 @@ def validate_model_provider_key(variable_name: str, api_key: str) -> None:
         "GOOGLE_API_KEY": "Google Generative AI",
         "WATSONX_APIKEY": "IBM WatsonX",
         "OLLAMA_BASE_URL": "Ollama",
+        "SURF_API_KEY": "SURF AI Hub",
     }
 
     provider = provider_map.get(variable_name)
@@ -322,6 +330,18 @@ def validate_model_provider_key(variable_name: str, api_key: str) -> None:
             # WatsonX validation would require additional parameters
             # Skip for now as it needs project_id, url, etc.
             return
+
+        elif provider == "SURF AI Hub":
+            from langchain_openai import ChatOpenAI
+
+            llm = ChatOpenAI(
+                api_key=api_key,
+                model_name="meta-llama/Llama-Guard-3-8B",
+                max_tokens=1,
+                base_url=DEFAULT_SURF_API_URL,
+            )
+            llm.invoke("test")
+
         elif provider == "Ollama":
             # Ollama is local, just verify the URL is accessible
             import requests
@@ -446,6 +466,7 @@ def get_language_model_options(
         "Google Generative AI": "ChatGoogleGenerativeAIFixed",
         "Ollama": "ChatOllama",
         "IBM WatsonX": "ChatWatsonx",
+        "SURF AI Hub": "ChatOpenAI",  # SURF AI Hub uses OpenAI-compatible API, so we can use ChatOpenAI class
     }
 
     api_key_param_mapping = {
@@ -454,6 +475,7 @@ def get_language_model_options(
         "Google Generative AI": "google_api_key",
         "Ollama": "base_url",
         "IBM WatsonX": "apikey",
+        "SURF AI Hub": "api_key",
     }
 
     # Track which providers have models
@@ -772,6 +794,7 @@ def normalize_model_names_to_dicts(model_names: list[str] | str) -> list[dict[st
         "Google Generative AI": "ChatGoogleGenerativeAIFixed",
         "Ollama": "ChatOllama",
         "IBM WatsonX": "ChatWatsonx",
+        "SURF AI Hub": "ChatOpenAI",  # SURF AI Hub uses OpenAI-compatible API, so we can use ChatOpenAI class
     }
 
     api_key_param_mapping = {
@@ -780,6 +803,7 @@ def normalize_model_names_to_dicts(model_names: list[str] | str) -> list[dict[st
         "Google Generative AI": "google_api_key",
         "Ollama": "base_url",
         "IBM WatsonX": "apikey",
+        "SURF AI Hub": "api_key",
     }
 
     # Build a lookup map of model_name -> full model data with runtime metadata
@@ -952,6 +976,11 @@ def get_llm(
         # For Ollama, handle custom base_url
         base_url_param = metadata.get("base_url_param", "base_url")
         kwargs[base_url_param] = ollama_base_url
+
+    elif provider == "SURF AI Hub":
+        # For SURF AI Hub, set the base URL to the default SURF API URL
+        base_url_param = metadata.get("base_url_param", "base_url")
+        kwargs[base_url_param] = DEFAULT_SURF_API_URL
 
     try:
         return model_class(**kwargs)
