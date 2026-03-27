@@ -218,6 +218,7 @@ export const SIDEBAR_CATEGORIES = [
   // { display_name: "AI Quality", name: "ai_quality", icon: "ChartScatter" },
   // { display_name: "AI Generation", name: "ai_generation", icon: "Sparkles" },
   { display_name: "HPC Workload", name: "generic_jobs", icon: "Cpu" },
+  { display_name: "SURF", name: "surf", icon: "Cpu" },
   {
     display_name: "Molecular Dynamics",
     name: "molecular_dynamics",
