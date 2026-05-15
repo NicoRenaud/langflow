@@ -135,13 +135,13 @@ class SLURMAPIConnector:
             job_status = response["jobs"][0]["job_state"][0]
             if job_status == "COMPLETED":
                 job_in_progress = False
-                # print(f"Job {JOB_ID} completed successfully.")
+                print(f"Job {JOB_ID} completed successfully.")
                 break
             if job_status in ["FAILED", "CANCELLED", "TIMEOUT"]:
                 job_in_progress = False
-                # print(f"Job {JOB_ID} failed with state: {job_status}")
-            # else:
-            # print(f"Job {JOB_ID} is still in progress with state: {job_status}")
+                print(f"Job {JOB_ID} failed with state: {job_status}")
+            else:
+                print(f"Job {JOB_ID} is still in progress with state: {job_status}")
 
             time.sleep(monitor_interval)
 

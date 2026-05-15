@@ -1,4 +1,5 @@
 import uuid
+
 import boto3
 
 
@@ -64,7 +65,7 @@ class ObjectStoreConnector:
         #     print('Bucket already exists')
         #     return
 
-        # print("Creates bucket " + self.settings["bucketname"] + " in Object Store")
+        print("Creates bucket " + self.settings["bucketname"] + " in Object Store")
         _ = resource.create_bucket(Bucket=self.settings["bucketname"])
 
     def delete_bucket(self):
@@ -88,7 +89,7 @@ class ObjectStoreConnector:
             aws_access_key_id=self.settings["os_access_key"],
             aws_secret_access_key=self.settings["os_secret_key"],
         )
-        # print("Deletes bucket " + self.settings["bucketname"] + " in Object Store")
+        print("Deletes bucket " + self.settings["bucketname"] + " in Object Store")
         _ = resource.delete_bucket(Bucket=self.settings["bucketname"])
 
     def purge_bucket(self):
@@ -103,7 +104,7 @@ class ObjectStoreConnector:
         -----
         This function is used to purge a bucket in the Object Store.
         """
-        # print("Purges bucket " + self.settings["bucketname"] + " in Object Store")
+        print("Purges bucket " + self.settings["bucketname"] + " in Object Store")
         resource = boto3.resource(
             "s3",
             "default",
@@ -145,12 +146,12 @@ class ObjectStoreConnector:
         )
 
         # check if bucket exists and create if not
-        # print("Creates bucket " + self.settings["bucketname"] + " in Object Store")
+        print("Creates bucket " + self.settings["bucketname"] + " in Object Store")
         _ = resource.create_bucket(Bucket=self.settings["bucketname"])
 
         # upload files
         for fn, obj in zip(filename, objectname, strict=True):
-            # print("Upload file " + fn + " to bucket as object " + obj)
+            print("Upload file " + fn + " to bucket as object " + obj)
             with open(fn, "rb") as data:
                 resource.upload_fileobj(data, self.settings["bucketname"], obj)
 
